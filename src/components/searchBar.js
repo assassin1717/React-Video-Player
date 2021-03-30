@@ -4,10 +4,15 @@ import { connect } from 'react-redux'
 import { searchVideo } from '../store/actions/search-video'
 
 class SearchBar extends Component {
+    constructor(props){
+        super(props)
+
+        this.props.searchVideo('tiagoBBIT')
+    }
+
     search = e => {
         if (e.keyCode === 13) {
             const word = e.target.value
-            console.log(word)
             this.props.searchVideo(word)
         }
 
@@ -16,7 +21,7 @@ class SearchBar extends Component {
     render() {
         return (
             <div className='search-bar'>
-                <Segment stacked>
+                <Segment stacked color='orange' inverted>
                     <Input icon='search' size='large' placeholder='Search ...' onKeyDown={(e) => this.search(e)} />
                 </Segment>
             </div>

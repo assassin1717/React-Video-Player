@@ -1,30 +1,51 @@
 import React, { Component } from 'react'
-import { Dimmer, List, Loader } from 'semantic-ui-react'
+import { Container, Dimmer, Image, List, Loader } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import VideoListItem from './videoListItem'
+import { playVideo } from '../store/actions/play-video'
 
 
 class RightPanel extends Component {
 
+    renderVideo(video) {
+        return (
+            <List.Item onClick={() => this.props.play(video)}>
+                <Image circular src={video.snippet.thumbnails.default.url} />
+                <List.Content>
+                    <List.Header>
+                        {video.snippet.title}
+                    </List.Header>
+                </List.Content>
+            </List.Item>
+        )
+    }
+
     render() {
         return (
             <div className='video-list'>
-                <List animated verticalAlign='middle'>
-                    {
-                        this.props.loading && (
-                            <Dimmer active inverted> 
-                                <Loader size='medium'>Loading...</Loader>
-                            </Dimmer>
-                        )
-                    }
-                    {
-                        this.props.data.map(video => {
-                            return <VideoListItem key={video.etag} url={video.snippet.thumbnails.default.url} title={video.snippet.title} />
-                        })
-                    }
-                </List>
+                <Container>
+                    <List animated verticalAlign='middle'>
+                        {
+                            this.props.loading && (
+                                <Dimmer active inverted>
+                                    <Loader size='medium'>Loading...</Loader>
+                                </Dimmer>
+                            )
+                        }
+                        {
+                            this.props.data.map(video => {
+                                return this.renderVideo(video)
+                            })
+                        }
+                    </List>
+                </Container>
             </div>
         )
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        play: (data) => dispatch(playVideo(data))
     }
 }
 
@@ -36,4 +57,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(RightPanel)
+export default connect(mapStateToProps, mapDispatchToProps)(RightPanel)

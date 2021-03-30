@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux'
 import searchVideosReducer from './searchVideoReducer'
+import playVideo from './playVideoReducer'
 
 const rootReducer=combineReducers({
-    searchVideosReducer
+    searchVideosReducer,
+    playVideo
 })
 
 export default rootReducer

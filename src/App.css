@@ -3,21 +3,30 @@
   grid-template-areas: 
   'search-bar search-bar search-bar search-bar'
   'video-player video-player video-player video-list'
-  'video-player video-player video-player video-list'
+  'video-player video-player video-player video-list';
 }
 
 .search-bar{
   grid-area: search-bar;
-  background: red;
-}
-
-.video-player{
-  grid-area: video-player;
-  background: blue;
 }
 
 .video-list{
   grid-area: video-list;
-  background: #fffacd;
   padding: 15px;
+}
+
+.video-player{
+  grid-area: video-player;
+  padding: 15px;
+}
+
+.video-title{
+  font-weight: 600;
+  color: orange;
+  padding: 10px;
+}
+
+.video-desc{
+  color: rgb(255, 81, 0);
+  padding: 10px;
 }
